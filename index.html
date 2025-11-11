@@ -19,15 +19,15 @@
         <span>BRUMAP</span>
       </a>
 
-      <!-- Toggle móvil (CSS only) -->
+      <!-- Toggle móvil (checkbox hack) -->
       <input id="nav-toggle" type="checkbox" class="nav__checkbox" aria-label="Abrir menú" />
       <label for="nav-toggle" class="nav__toggle" aria-hidden="true"></label>
 
       <nav class="nav">
-        <a href="#servicios">Servicios</a>
-        <a href="#productos">Productos</a>
-        <a href="#proceso">Ventajas HF</a>
-        <a href="#contacto" class="btn btn--sm">Contacto</a>
+        <a class="nav__link" href="#servicios">Servicios</a>
+        <a class="nav__link" href="#productos">Productos</a>
+        <a class="nav__link" href="#proceso">Ventajas HF</a>
+        <a class="btn btn--sm nav__link" href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -40,8 +40,8 @@
         <p>Fabricación de <strong>folders, micas portapapeles</strong> y <strong>porta documentos</strong> con acabados profesionales, alta durabilidad y sellos limpios.</p>
         <div class="hero__cta">
           <!-- Reemplaza el número con el de BRUMAP (sin +) -->
-          <a class="btn" href="https://wa.me/51967647745" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="btn btn--outline" href="mailto:ventas@brumap.pe">ventas@brumap.pe</a>
+          <a class="btn nav__link" href="https://wa.me/51999999999" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn--outline nav__link" href="mailto:ventas@brumap.pe">ventas@brumap.pe</a>
         </div>
         <p class="hero__badges">
           <span class="badge">Lima, Perú</span>
@@ -162,9 +162,9 @@
       <div class="contact">
         <div class="contact__card">
           <h3>Escríbenos</h3>
-          <p><strong>WhatsApp:</strong> <a href="https://wa.me/51999999999" target="_blank" rel="noopener">+51 999 999 999</a></p>
-          <p><strong>Correo:</strong> <a href="mailto:ventas@brumap.pe">ventas@brumap.pe</a></p>
-          <p><strong>Teléfono:</strong> <a href="tel:+51999999999">(+51) 999 999 999</a></p>
+          <p><strong>WhatsApp:</strong> <a class="nav__link" href="https://wa.me/51999999999" target="_blank" rel="noopener">+51 999 999 999</a></p>
+          <p><strong>Correo:</strong> <a class="nav__link" href="mailto:ventas@brumap.pe">ventas@brumap.pe</a></p>
+          <p><strong>Teléfono:</strong> <a class="nav__link" href="tel:+51999999999">(+51) 999 999 999</a></p>
         </div>
 
         <div class="contact__card">
@@ -182,11 +182,34 @@
     <div class="container footer__inner">
       <p>© 2025 BRUMAP. Todos los derechos reservados.</p>
       <p class="footer__links">
-        <a href="#servicios">Servicios</a> ·
-        <a href="#productos">Productos</a> ·
-        <a href="#contacto">Contacto</a>
+        <a class="nav__link" href="#servicios">Servicios</a> ·
+        <a class="nav__link" href="#productos">Productos</a> ·
+        <a class="nav__link" href="#contacto">Contacto</a>
       </p>
     </div>
   </footer>
+
+  <!-- ======= Script: cerrar menú móvil al elegir opción ======= -->
+  <script>
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.querySelectorAll('.nav__link');
+
+      function closeMenu() {
+        if (toggle && toggle.checked) toggle.checked = false;
+      }
+
+      links.forEach(a => a.addEventListener('click', closeMenu));
+      window.addEventListener('hashchange', closeMenu);
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 720) closeMenu();
+      });
+      document.addEventListener('click', (e) => {
+        const nav = document.querySelector('.nav');
+        const label = document.querySelector('.nav__toggle');
+        if (!nav.contains(e.target) && e.target !== label) closeMenu();
+      });
+    })();
+  </script>
 </body>
 </html>
